@@ -2,8 +2,15 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
-  Code2, Shield, Network, Zap, HeadphonesIcon, BookOpen,
-  Clock, Users, ChevronRight,
+  Code2,
+  Shield,
+  Network,
+  Zap,
+  HeadphonesIcon,
+  BookOpen,
+  Clock,
+  Users,
+  ChevronRight,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -17,11 +24,31 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.12 } } };
 
 const serviceColors = [
-  { from: "from-blue-500", to: "to-indigo-600", glow: "hover:shadow-blue-500/20" },
-  { from: "from-red-500", to: "to-orange-600", glow: "hover:shadow-red-500/20" },
-  { from: "from-green-500", to: "to-teal-600", glow: "hover:shadow-green-500/20" },
-  { from: "from-amber-500", to: "to-yellow-500", glow: "hover:shadow-amber-500/20" },
-  { from: "from-purple-500", to: "to-violet-600", glow: "hover:shadow-purple-500/20" },
+  {
+    from: "from-blue-500",
+    to: "to-indigo-600",
+    glow: "hover:shadow-blue-500/20",
+  },
+  {
+    from: "from-red-500",
+    to: "to-orange-600",
+    glow: "hover:shadow-red-500/20",
+  },
+  {
+    from: "from-green-500",
+    to: "to-teal-600",
+    glow: "hover:shadow-green-500/20",
+  },
+  {
+    from: "from-amber-500",
+    to: "to-yellow-500",
+    glow: "hover:shadow-amber-500/20",
+  },
+  {
+    from: "from-purple-500",
+    to: "to-violet-600",
+    glow: "hover:shadow-purple-500/20",
+  },
   { from: "from-cyan-500", to: "to-sky-600", glow: "hover:shadow-cyan-500/20" },
 ];
 
@@ -38,18 +65,56 @@ const whyItems = [
   { icon: Users, titleKey: "why.expert", descKey: "why.expert.desc" },
   { icon: Clock, titleKey: "why.fast", descKey: "why.fast.desc" },
   { icon: Shield, titleKey: "why.secure", descKey: "why.secure.desc" },
-  { icon: HeadphonesIcon, titleKey: "why.support", descKey: "why.support.desc" },
+  {
+    icon: HeadphonesIcon,
+    titleKey: "why.support",
+    descKey: "why.support.desc",
+  },
 ];
 
 const testimonials = [
-  { name: "أحمد المنصوري", nameEn: "Ahmed Al Mansouri", role: "CTO", company: "Advanced Tech Co.", text: "نوفيكس حولت بنيتنا التحتية بالكامل في وقت قياسي. فريق محترف واحترافية عالية.", textEn: "NOVEX transformed our entire infrastructure in record time. A truly professional team." },
-  { name: "سارة الخالدي", nameEn: "Sara Al Khalidi", role: "CEO", company: "Elite Group", text: "الدعم المستمر والتزامهم بالمواعيد جعلنا نثق بهم شريكاً استراتيجياً لأعمالنا.", textEn: "Their continuous support and commitment to deadlines made them our trusted strategic partner." },
-  { name: "خالد العمري", nameEn: "Khaled Al Omari", role: "Operations Director", company: "Digital Bank", text: "حلول الأمن السيبراني التي قدمتها نوفيكس أنقذت بياناتنا من أكثر من هجمة إلكترونية.", textEn: "NOVEX's cybersecurity solutions saved our data from multiple cyber attacks." },
+  {
+    name: "أحمد المنصوري",
+    nameEn: "Ahmed Al Mansouri",
+    role: "CTO",
+    company: "Advanced Tech Co.",
+    text: "نوفيكس حولت بنيتنا التحتية بالكامل في وقت قياسي. فريق محترف واحترافية عالية.",
+    textEn:
+      "NOVEX transformed our entire infrastructure in record time. A truly professional team.",
+  },
+  {
+    name: "سارة الخالدي",
+    nameEn: "Sara Al Khalidi",
+    role: "CEO",
+    company: "Elite Group",
+    text: "الدعم المستمر والتزامهم بالمواعيد جعلنا نثق بهم شريكاً استراتيجياً لأعمالنا.",
+    textEn:
+      "Their continuous support and commitment to deadlines made them our trusted strategic partner.",
+  },
+  {
+    name: "خالد العمري",
+    nameEn: "Khaled Al Omari",
+    role: "Operations Director",
+    company: "Digital Bank",
+    text: "حلول الأمن السيبراني التي قدمتها نوفيكس أنقذت بياناتنا من أكثر من هجمة إلكترونية.",
+    textEn:
+      "NOVEX's cybersecurity solutions saved our data from multiple cyber attacks.",
+  },
 ];
 
 const techStack = [
-  "React", "Node.js", "Python", "TypeScript", "Docker",
-  "Kubernetes", "AWS", "PostgreSQL", "Redis", "GraphQL", "Next.js", "Vue.js",
+  "React",
+  "Node.js",
+  "Python",
+  "TypeScript",
+  "Docker",
+  "Kubernetes",
+  "AWS",
+  "PostgreSQL",
+  "Redis",
+  "GraphQL",
+  "Next.js",
+  "Vue.js",
 ];
 
 export default function Home() {
@@ -59,92 +124,168 @@ export default function Home() {
   const whyReveal = useScrollReveal();
   const testimonialsReveal = useScrollReveal();
 
-  const heroTypePhrases = lang === "ar"
-    ? ["تطوير برمجيات متطورة", "حلول أمن سيبراني", "شبكات ذكية", "تحول رقمي حقيقي"]
-    : ["Advanced Software Development", "Cybersecurity Solutions", "Smart Networking", "Real Digital Transformation"];
+  const heroTypePhrases =
+    lang === "ar"
+      ? [
+          "تطوير برمجيات متطورة",
+          "حلول أمن سيبراني",
+          "شبكات ذكية",
+          "تحول رقمي حقيقي",
+        ]
+      : [
+          "Advanced Software Development",
+          "Cybersecurity Solutions",
+          "Smart Networking",
+          "Real Digital Transformation",
+        ];
 
   return (
     <div className="overflow-x-hidden">
-
       {/* ── HERO ─── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
         <ParticleCanvas />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-6 border border-primary/20">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               {t("app.tagline")}
             </span>
           </motion.div>
 
-          <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight tracking-tight">
+          <motion.h1
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight tracking-tight"
+          >
             <span className="block text-foreground">{t("hero.title1")}</span>
             <span className="block bg-gradient-to-l from-primary to-secondary bg-clip-text text-transparent">
               {t("hero.title2")}
             </span>
           </motion.h1>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.55 }}
-            className="mt-4 text-xl sm:text-2xl font-semibold text-primary min-h-[2rem]">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.55 }}
+            className="mt-4 text-xl sm:text-2xl font-semibold text-primary min-h-[2rem]"
+          >
             <TypewriterText phrases={heroTypePhrases} />
           </motion.div>
 
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.65 }}
-            className="mt-6 text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.65 }}
+            className="mt-6 text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
+          >
             {t("hero.subtitle")}
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-10 flex flex-wrap gap-4 justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.8 }}
+            className="mt-10 flex flex-wrap gap-4 justify-center"
+          >
             <Link href="/services">
-              <button data-testid="hero-cta1"
-                className="relative px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl overflow-hidden group transition-all hover:shadow-lg hover:shadow-primary/30 hover:scale-105">
+              <button
+                data-testid="hero-cta1"
+                className="relative px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl overflow-hidden group transition-all hover:shadow-lg hover:shadow-primary/30 hover:scale-105"
+              >
                 <span className="relative z-10">{t("hero.cta1")}</span>
                 <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors" />
               </button>
             </Link>
             <Link href="/contact">
-              <button data-testid="hero-cta2"
-                className="px-8 py-3.5 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all hover:scale-105">
+              <button
+                data-testid="hero-cta2"
+                className="px-8 py-3.5 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all hover:scale-105"
+              >
                 {t("hero.cta2")}
               </button>
             </Link>
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-5 h-8 border-2 border-border rounded-full flex justify-center pt-1.5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="w-5 h-8 border-2 border-border rounded-full flex justify-center pt-1.5"
+          >
             <div className="w-1 h-2 bg-primary rounded-full" />
           </motion.div>
         </motion.div>
       </section>
 
       {/* ── SERVICES ─── */}
-      <section ref={servicesReveal.ref} className="py-24 px-4 max-w-7xl mx-auto">
-        <motion.div variants={stagger} initial="hidden" animate={servicesReveal.visible ? "show" : "hidden"} className="text-center mb-16">
-          <motion.p variants={fadeUp} className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">{t("services.title")}</motion.p>
-          <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-black text-foreground">{t("services.subtitle")}</motion.h2>
+      <section
+        ref={servicesReveal.ref}
+        className="py-24 px-4 max-w-7xl mx-auto"
+      >
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate={servicesReveal.visible ? "show" : "hidden"}
+          className="text-center mb-16"
+        >
+          <motion.p
+            variants={fadeUp}
+            className="text-primary font-semibold text-sm uppercase tracking-widest mb-3"
+          >
+            {t("services.title")}
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            className="text-3xl sm:text-4xl font-black text-foreground"
+          >
+            {t("services.subtitle")}
+          </motion.h2>
         </motion.div>
 
-        <motion.div variants={stagger} initial="hidden" animate={servicesReveal.visible ? "show" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate={servicesReveal.visible ? "show" : "hidden"}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
           {services.map(({ icon: Icon, key }, i) => {
             const c = serviceColors[i];
             return (
-              <motion.div key={key} variants={fadeUp}
+              <motion.div
+                key={key}
+                variants={fadeUp}
                 className={`group relative bg-card border border-border rounded-2xl p-7 transition-all duration-300 overflow-hidden hover:border-transparent hover:-translate-y-1 hover:shadow-2xl ${c.glow}`}
-                whileHover={{ scale: 1.015 }}>
+                whileHover={{ scale: 1.015 }}
+              >
                 {/* Hover glow ring */}
-                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${c.from}/5 ${c.to}/5`} />
-                <div className={`absolute inset-0 rounded-2xl ring-1 ring-inset ring-transparent group-hover:ring-white/10 transition-all duration-300`} />
-                <div className={`relative w-12 h-12 rounded-xl bg-gradient-to-br ${c.from} ${c.to} flex items-center justify-center mb-5 shadow-md group-hover:shadow-lg transition-shadow`}>
+                <div
+                  className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${c.from}/5 ${c.to}/5`}
+                />
+                <div
+                  className={`absolute inset-0 rounded-2xl ring-1 ring-inset ring-transparent group-hover:ring-white/10 transition-all duration-300`}
+                />
+                <div
+                  className={`relative w-12 h-12 rounded-xl bg-gradient-to-br ${c.from} ${c.to} flex items-center justify-center mb-5 shadow-md group-hover:shadow-lg transition-shadow`}
+                >
                   <Icon size={22} className="text-white" />
                 </div>
-                <h3 className="relative text-lg font-bold text-foreground mb-2">{t(`${key}.title`)}</h3>
-                <p className="relative text-sm text-muted-foreground leading-relaxed">{t(`${key}.desc`)}</p>
+                <h3 className="relative text-lg font-bold text-foreground mb-2">
+                  {t(`${key}.title`)}
+                </h3>
+                <p className="relative text-sm text-muted-foreground leading-relaxed">
+                  {t(`${key}.desc`)}
+                </p>
               </motion.div>
             );
           })}
@@ -152,7 +293,10 @@ export default function Home() {
 
         <div className="mt-12 text-center">
           <Link href="/services">
-            <button data-testid="services-all-btn" className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+            <button
+              data-testid="services-all-btn"
+              className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+            >
               {t("services.learnmore")} <ChevronRight size={16} />
             </button>
           </Link>
@@ -160,23 +304,52 @@ export default function Home() {
       </section>
 
       {/* ── WHY NOVEX ─── */}
-      <section ref={whyReveal.ref} className="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+      <section
+        ref={whyReveal.ref}
+        className="py-24 bg-gradient-to-br from-primary/5 to-secondary/5"
+      >
         <div className="max-w-7xl mx-auto px-4">
-          <motion.div variants={stagger} initial="hidden" animate={whyReveal.visible ? "show" : "hidden"} className="text-center mb-16">
-            <motion.p variants={fadeUp} className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">{t("why.title")}</motion.p>
-            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-black">{t("why.subtitle")}</motion.h2>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate={whyReveal.visible ? "show" : "hidden"}
+            className="text-center mb-16"
+          >
+            <motion.p
+              variants={fadeUp}
+              className="text-primary font-semibold text-sm uppercase tracking-widest mb-3"
+            >
+              {t("why.title")}
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl sm:text-4xl font-black"
+            >
+              {t("why.subtitle")}
+            </motion.h2>
           </motion.div>
-          <motion.div variants={stagger} initial="hidden" animate={whyReveal.visible ? "show" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate={whyReveal.visible ? "show" : "hidden"}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {whyItems.map(({ icon: Icon, titleKey, descKey }) => (
-              <motion.div key={titleKey} variants={fadeUp}
+              <motion.div
+                key={titleKey}
+                variants={fadeUp}
                 className="bg-card border border-border rounded-2xl p-7 text-center hover:shadow-lg hover:border-primary/30 transition-all"
-                whileHover={{ y: -4 }}>
+                whileHover={{ y: -4 }}
+              >
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
                   <Icon size={24} className="text-primary" />
                 </div>
-                <h3 className="font-bold text-foreground mb-2">{t(titleKey)}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{t(descKey)}</p>
+                <h3 className="font-bold text-foreground mb-2">
+                  {t(titleKey)}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t(descKey)}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -186,25 +359,55 @@ export default function Home() {
       {/* ── FEATURED PROJECTS ─── */}
       <section className="py-24 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">{t("projects.title")}</p>
-          <h2 className="text-3xl sm:text-4xl font-black">{t("projects.subtitle")}</h2>
+          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">
+            {t("projects.title")}
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-black">
+            {t("projects.subtitle")}
+          </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { titleAr: "منصة إدارة المستشفيات", titleEn: "Hospital Management Platform", cat: "Web", img: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80" },
-            { titleAr: "تطبيق الخدمات المصرفية", titleEn: "Banking Services App", cat: "Mobile", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80" },
-            { titleAr: "نظام الأمن المتكامل", titleEn: "Integrated Security System", cat: "Security", img: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=80" },
+            {
+              titleAr: "منصة إدارة المستشفيات",
+              titleEn: "Hospital Management Platform",
+              cat: "Web",
+              img: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80",
+            },
+            {
+              titleAr: "تطبيق الخدمات المصرفية",
+              titleEn: "Banking Services App",
+              cat: "Mobile",
+              img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80",
+            },
+            {
+              titleAr: "نظام الأمن المتكامل",
+              titleEn: "Integrated Security System",
+              cat: "Security",
+              img: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&q=80",
+            },
           ].map((proj, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ delay: i * 0.15, duration: 0.6 }}
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
               className="group relative bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:border-primary/30 transition-all duration-400"
-              whileHover={{ y: -4 }}>
+              whileHover={{ y: -4 }}
+            >
               <div className="relative h-48 overflow-hidden">
-                <img src={proj.img} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <img
+                  src={proj.img}
+                  alt=""
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="p-6">
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">{proj.cat}</span>
+                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
+                  {proj.cat}
+                </span>
                 <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">
                   {lang === "ar" ? proj.titleAr : proj.titleEn}
                 </h3>
@@ -214,7 +417,10 @@ export default function Home() {
         </div>
         <div className="mt-10 text-center">
           <Link href="/projects">
-            <button data-testid="view-all-projects" className="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all">
+            <button
+              data-testid="view-all-projects"
+              className="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-xl hover:bg-primary hover:text-primary-foreground transition-all"
+            >
               {lang === "ar" ? "كل المشاريع" : "All Projects"}
             </button>
           </Link>
@@ -222,20 +428,42 @@ export default function Home() {
       </section>
 
       {/* ── TESTIMONIALS ─── */}
-      <section ref={testimonialsReveal.ref} className="py-24 bg-card border-y border-border">
+      <section
+        ref={testimonialsReveal.ref}
+        className="py-24 bg-card border-y border-border"
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">{t("testimonials.title")}</p>
-            <h2 className="text-3xl sm:text-4xl font-black">{t("testimonials.subtitle")}</h2>
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">
+              {t("testimonials.title")}
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black">
+              {t("testimonials.subtitle")}
+            </h2>
           </div>
-          <motion.div variants={stagger} initial="hidden" animate={testimonialsReveal.visible ? "show" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate={testimonialsReveal.visible ? "show" : "hidden"}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
             {testimonials.map((tm, i) => (
-              <motion.div key={i} variants={fadeUp}
+              <motion.div
+                key={i}
+                variants={fadeUp}
                 className="relative bg-background border border-border rounded-2xl p-7 hover:shadow-lg hover:border-primary/20 transition-all"
-                whileHover={{ y: -3 }}>
-                <div className="absolute top-5 end-6 text-5xl font-black text-primary/10 leading-none select-none">"</div>
-                <div className="flex gap-1 mb-4">{[...Array(5)].map((_, s) => <span key={s} className="text-yellow-400 text-sm">★</span>)}</div>
+                whileHover={{ y: -3 }}
+              >
+                <div className="absolute top-5 end-6 text-5xl font-black text-primary/10 leading-none select-none">
+                  "
+                </div>
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, s) => (
+                    <span key={s} className="text-yellow-400 text-sm">
+                      ★
+                    </span>
+                  ))}
+                </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-5 relative z-10">
                   "{lang === "ar" ? tm.text : tm.textEn}"
                 </p>
@@ -244,8 +472,12 @@ export default function Home() {
                     {(lang === "ar" ? tm.name : tm.nameEn).charAt(0)}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">{lang === "ar" ? tm.name : tm.nameEn}</p>
-                    <p className="text-xs text-muted-foreground">{tm.role} — {tm.company}</p>
+                    <p className="text-sm font-semibold text-foreground">
+                      {lang === "ar" ? tm.name : tm.nameEn}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {tm.role} — {tm.company}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -257,22 +489,30 @@ export default function Home() {
       {/* ── TECH MARQUEE (CSS-based, pauses per item on hover) ─── */}
       <section className="py-16 overflow-hidden bg-background">
         <div className="text-center mb-10 px-4">
-          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">{t("tech.title")}</p>
+          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">
+            {t("tech.title")}
+          </p>
           <p className="text-muted-foreground text-sm">{t("tech.subtitle")}</p>
         </div>
         <div
-          className="relative flex overflow-hidden"
+          className="relative flex overflow-x-hidden overflow-y-visible"
           onMouseEnter={() => setMarqueeHovered(true)}
           onMouseLeave={() => setMarqueeHovered(false)}
         >
           <div
-            className={lang === "ar" ? "marquee-rtl flex gap-4 shrink-0" : "marquee-ltr flex gap-4 shrink-0"}
-            style={{ animationPlayState: marqueeHovered ? "paused" : "running" }}
+            className={
+              lang === "ar"
+                ? "marquee-rtl flex gap-4 shrink-0"
+                : "marquee-ltr flex gap-4 shrink-0"
+            }
+            style={{
+              animationPlayState: marqueeHovered ? "paused" : "running",
+            }}
           >
             {[...techStack, ...techStack].map((tech, i) => (
               <div
                 key={i}
-                className="shrink-0 px-6 py-3 bg-card border border-border rounded-xl text-sm font-semibold whitespace-nowrap cursor-default transition-all duration-200 hover:border-primary/60 hover:text-primary hover:bg-primary/5 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
+                className="shrink-0 px-6 py-3 bg-card border border-border rounded-xl text-sm font-semibold whitespace-nowrap cursor-default transition-all duration-300 hover:border-primary hover:text-primary hover:bg-primary/[0.06] hover:shadow-[0_0_20px_-4px] hover:shadow-primary/20 hover:-translate-y-1"
               >
                 {tech}
               </div>
@@ -284,20 +524,27 @@ export default function Home() {
       {/* ── CTA ─── */}
       <section className="py-20 bg-gradient-to-r from-primary to-secondary">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-black mb-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl font-black mb-4"
+          >
             {t("cta.title")}
           </motion.h2>
-          <p className="text-white/80 mb-8 text-base max-w-xl mx-auto">{t("cta.subtitle")}</p>
+          <p className="text-white/80 mb-8 text-base max-w-xl mx-auto">
+            {t("cta.subtitle")}
+          </p>
           <Link href="/contact">
-            <button data-testid="cta-button"
-              className="px-10 py-4 bg-white text-primary font-bold rounded-xl hover:bg-white/90 transition-all hover:scale-105 shadow-lg">
+            <button
+              data-testid="cta-button"
+              className="px-10 py-4 bg-white text-primary font-bold rounded-xl hover:bg-white/90 transition-all hover:scale-105 shadow-lg"
+            >
               {t("cta.button")}
             </button>
           </Link>
         </div>
       </section>
-
     </div>
   );
 }

@@ -34,8 +34,9 @@ export default function Navbar() {
     document.documentElement.style.setProperty("--theme-x", `${x}px`);
     document.documentElement.style.setProperty("--theme-y", `${y}px`);
     if ("startViewTransition" in document) {
-      (document as unknown as { startViewTransition: (cb: () => void) => void })
-        .startViewTransition(() => setTheme(next));
+      (
+        document as unknown as { startViewTransition: (cb: () => void) => void }
+      ).startViewTransition(() => setTheme(next));
     } else {
       setTheme(next);
     }
@@ -59,7 +60,9 @@ export default function Navbar() {
             >
               <span className="text-primary">NOV</span>
               <span className="text-foreground">EX</span>
-              <span className="text-secondary text-sm font-medium ms-1">Solutions</span>
+              <span className="text-secondary text-sm font-medium ms-1">
+                Solutions
+              </span>
             </span>
           </Link>
 

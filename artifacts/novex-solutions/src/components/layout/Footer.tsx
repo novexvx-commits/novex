@@ -4,7 +4,9 @@ import { Mail, Phone, Wifi, ArrowUpRight, Zap } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 const WA_NUMBER = "201016058253";
-const WA_MESSAGE = encodeURIComponent("Hello, I'm reaching out via NOVEX Solutions website.");
+const WA_MESSAGE = encodeURIComponent(
+  "Hello, I'm reaching out via NOVEX Solutions website.",
+);
 const FB_URL = "https://www.facebook.com/share/1CZpvVBEp8/";
 
 const navLinks = [
@@ -28,30 +30,60 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #05091a 0%, #070d20 60%, #040810 100%)" }}>
+    <footer
+      className="relative overflow-hidden border-t border-white/[0.07]"
+      style={{
+        background:
+          "linear-gradient(160deg, #05091a 0%, #070d20 60%, #040810 100%)",
+      }}
+    >
       {/* Top accent line */}
-      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(80,130,255,0.5), rgba(0,210,240,0.4), transparent)" }} />
+      <div
+        className="absolute top-0 inset-x-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(80,130,255,0.5), rgba(0,210,240,0.4), transparent)",
+        }}
+      />
 
       {/* Background grid */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: "linear-gradient(rgba(80,130,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(80,130,255,0.8) 1px, transparent 1px)",
+          backgroundImage:
+            "linear-gradient(rgba(80,130,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(80,130,255,0.8) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
 
       {/* Glow orbs */}
-      <div className="absolute top-0 start-1/4 w-96 h-96 rounded-full opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle, rgba(80,130,255,0.6) 0%, transparent 70%)" }} />
-      <div className="absolute bottom-0 end-1/4 w-64 h-64 rounded-full opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,210,240,0.6) 0%, transparent 70%)" }} />
+      <div
+        className="absolute top-0 start-1/4 w-96 h-96 rounded-full opacity-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(80,130,255,0.6) 0%, transparent 70%)",
+        }}
+      />
+      <div
+        className="absolute bottom-0 end-1/4 w-64 h-64 rounded-full opacity-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(0,210,240,0.6) 0%, transparent 70%)",
+        }}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-
         {/* CTA strip */}
         <div className="mb-14 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <p className="text-xs text-cyan-400 font-semibold uppercase tracking-widest mb-1">{lang === "ar" ? "هل أنت مستعد؟" : "Ready to start?"}</p>
-            <h3 className="text-xl font-black text-white">{lang === "ar" ? "ابدأ مشروعك معنا اليوم" : "Start your project with us today"}</h3>
+            <p className="text-xs text-cyan-400 font-semibold uppercase tracking-widest mb-1">
+              {lang === "ar" ? "هل أنت مستعد؟" : "Ready to start?"}
+            </p>
+            <h3 className="text-xl font-black text-white">
+              {lang === "ar"
+                ? "ابدأ مشروعك معنا اليوم"
+                : "Start your project with us today"}
+            </h3>
           </div>
           <Link href="/contact">
             <button className="shrink-0 flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-sm hover:opacity-90 hover:scale-105 transition-all shadow-lg shadow-blue-500/25">
@@ -63,17 +95,20 @@ export default function Footer() {
 
         {/* Main grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12">
-
           {/* Brand */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                <Zap size={16} className="text-white" />
-              </div>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src="/logo.png"
+                alt="NOVEX"
+                className="w-9 h-9 rounded-lg object-contain"
+              />
               <span className="text-xl font-black tracking-tight">
                 <span className="text-blue-400">NOV</span>
                 <span className="text-white">EX</span>
-                <span className="text-cyan-400 text-sm font-medium ms-1">Solutions</span>
+                <span className="text-cyan-400 text-sm font-medium ms-1">
+                  Solutions
+                </span>
               </span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-6">
@@ -146,25 +181,39 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4">
               <li>
-                <a href="mailto:novex.vx@gmail.com" data-testid="footer-email"
-                  className="flex items-start gap-3 group">
+                <a
+                  href="mailto:novex.vx@gmail.com"
+                  data-testid="footer-email"
+                  className="flex items-start gap-3 group"
+                >
                   <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 group-hover:bg-blue-500/20 transition-colors">
                     <Mail size={13} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "البريد" : "Email"}</p>
-                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">novex.vx@gmail.com</span>
+                    <p className="text-xs text-slate-500 mb-0.5">
+                      {lang === "ar" ? "البريد" : "Email"}
+                    </p>
+                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
+                      novex.vx@gmail.com
+                    </span>
                   </div>
                 </a>
               </li>
               <li>
-                <a href="tel:+201016058253" className="flex items-start gap-3 group">
+                <a
+                  href="tel:+201016058253"
+                  className="flex items-start gap-3 group"
+                >
                   <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0 group-hover:bg-cyan-500/20 transition-colors">
                     <Phone size={13} className="text-cyan-400" />
                   </div>
                   <div>
-                    <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "الهاتف" : "Phone"}</p>
-                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">+20 101 605 8253</span>
+                    <p className="text-xs text-slate-500 mb-0.5">
+                      {lang === "ar" ? "الهاتف" : "Phone"}
+                    </p>
+                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
+                      +20 101 605 8253
+                    </span>
                   </div>
                 </a>
               </li>
@@ -173,8 +222,12 @@ export default function Footer() {
                   <Wifi size={13} className="text-purple-400" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "طريقة العمل" : "Work Style"}</p>
-                  <span className="text-sm text-slate-300">{lang === "ar" ? "عمل عن بُعد" : "Fully Remote"}</span>
+                  <p className="text-xs text-slate-500 mb-0.5">
+                    {lang === "ar" ? "طريقة العمل" : "Work Style"}
+                  </p>
+                  <span className="text-sm text-slate-300">
+                    {lang === "ar" ? "عمل عن بُعد" : "Fully Remote"}
+                  </span>
                 </div>
               </li>
             </ul>
@@ -187,7 +240,9 @@ export default function Footer() {
             &copy; {year} NOVEX Solutions. {t("footer.rights")}.
           </p>
           <p className="text-xs text-slate-700">
-            {lang === "ar" ? "مصنوع بشغف لتحقيق التميز التقني" : "Crafted with passion for technological excellence"}
+            {lang === "ar"
+              ? "مصنوع بشغف لتحقيق التميز التقني"
+              : "Crafted with passion for technological excellence"}
           </p>
         </div>
       </div>
