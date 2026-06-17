@@ -64,12 +64,11 @@ globalThis.__dirname = __bannerPath.dirname(globalThis.__filename);
 
   // Build 2: Vercel serverless handler — exports Express app as default (no listen).
   // esbuild-plugin-pino only supports string entry points, so this must be a separate call.
-  // No pino plugin here — the pino workers are already produced by Build 1.
   await esbuild({
     ...commonConfig,
-    plugins: [],
-    entryPoints: [path.resolve(artifactDir, "src/app.ts")],
-    entryNames: "handler",
+    entryPoints: {
+      handler: path.resolve(artifactDir, "src/app.ts")
+    },
     logLevel: "silent",
   });
 }
