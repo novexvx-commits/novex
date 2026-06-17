@@ -1,44 +1,21 @@
 {
   "version": 2,
+  "installCommand": "npm install -g pnpm && pnpm install",
   "buildCommand": "pnpm --filter @workspace/api-server run build && PORT=5173 BASE_PATH=/ pnpm --filter @workspace/novex-solutions run build",
-  "builds": [
-    {
-      "src": "artifacts/api-server/dist/handler.mjs",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "artifacts/novex-solutions/dist/public/**",
-      "use": "@vercel/static"
+  "outputDirectory": "artifacts/novex-solutions/dist/public",
+  "functions": {
+    "artifacts/api-server/dist/handler.mjs": {
+      "runtime": "nodejs20.x"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/artifacts/api-server/dist/handler.mjs"
+      "source": "/api/:path*",
+      "destination": "/artifacts/api-server/dist/handler.mjs"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/artifacts/novex-solutions/dist/public/assets/$1"
-    },
-    {
-      "src": "/favicon.svg",
-      "dest": "/artifacts/novex-solutions/dist/public/favicon.svg"
-    },
-    {
-      "src": "/logo.png",
-      "dest": "/artifacts/novex-solutions/dist/public/logo.png"
-    },
-    {
-      "src": "/opengraph.jpg",
-      "dest": "/artifacts/novex-solutions/dist/public/opengraph.jpg"
-    },
-    {
-      "src": "/robots.txt",
-      "dest": "/artifacts/novex-solutions/dist/public/robots.txt"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/artifacts/novex-solutions/dist/public/index.html"
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }
