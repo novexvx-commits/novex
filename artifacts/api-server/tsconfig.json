@@ -8,13 +8,5 @@
     "esModuleInterop": true,
     "types": ["node"]
   },
-  "include": ["src"],
-  "references": [
-    {
-      "path": "../../lib/db"
-    },
-    {
-      "path": "../../lib/api-zod"
-    }
-  ]
+  "include": ["src"]
 }
