@@ -1,0 +1,45 @@
+Design a modern and sophisticated website for a technology company called NOVEX Solutions.
+
+The website should not look like it was created by artificial intelligence, but rather like the website of a leading technology agency.
+
+🧠 Brand Identity
+Name: Novex Solutions
+Sector: IT Services / Software Development / Cybersecurity / Networking / Digital Solutions
+Style: Modern, Minimalist, Futuristic, Premium
+Language: Professional, Clear, Confident
+🌐 Required Pages
+1. Homepage
+
+2. About Us Page
+
+3. Services Page
+
+4. Our Projects Page
+Web layout to showcase our work
+Case study information cards
+Hover animation effects
+Filter system (Web / Mobile / Security / Networking)
+5. Contact Us Page
+Contact form (Name, Email, Message)
+Company email: novex.vx@gmail.com
+Phone button (Click to call)
+Social media links (WhatsApp, Facebook, Only)
+Map section
+🎨 UI/UX Requirements
+Dark mode + Light mode (default)
+Smooth animations (Hover animation, Motion effects) (Indicator)
+Responsive across all devices
+Clean and crisp fonts
+Precise interactions everywhere
+⚙️ Technical Requirements
+Organized folder structure
+Reusable components
+Fast loading performance
+Search engine optimized architecture
+Do not use pre-made templates
+🚀 Important Instructions
+Do not make the design look like a pre-made template
+Do not use the default Bootstrap design
+Everything should look like a custom design
+Make the spacing, typography, and layout distinctive
+I want you to use social media icons (Facebook and WhatsApp only) and also make the default style Arabic with a light mode that is easy on the eyes. I want something elegant, organized, and a way to present your projects in an impressive and professional manner. I want the website to have features that are literally not found on any other website—something truly impressive. Focus on the language; the default should be Arabic from right to left and the opposite for English. I don't want text that looks like artificial intelligence; I want simple language, not a lot of unnecessary details. The WhatsApp icon should be on the right side of every page, like this.
