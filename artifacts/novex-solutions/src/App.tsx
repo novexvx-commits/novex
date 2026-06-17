@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/context/ThemeProvider";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppFloat from "@/components/sections/WhatsAppFloat";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -20,17 +21,13 @@ const queryClient = new QueryClient();
 const pageVariants = {
   initial: { opacity: 0, y: 12 },
   enter: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
+  exit: { opacity: 0, y: -8 },
 };
 
 function AnimatedRoute({ component: Component }: { component: React.ComponentType }) {
   return (
-    <motion.div
-      variants={pageVariants}
-      initial="initial"
-      animate="enter"
-      exit="exit"
-    >
+    <motion.div variants={pageVariants} initial="initial" animate="enter" exit="exit"
+      transition={{ duration: 0.35 }}>
       <Component />
     </motion.div>
   );
@@ -60,6 +57,7 @@ function AppContent() {
         <Router />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </div>
   );
 }

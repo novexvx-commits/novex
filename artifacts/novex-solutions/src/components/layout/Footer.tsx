@@ -1,64 +1,114 @@
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { SiWhatsapp, SiFacebook } from "react-icons/si";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight, Zap } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
+const navLinks = [
+  { key: "nav.home", href: "/" },
+  { key: "nav.about", href: "/about" },
+  { key: "nav.services", href: "/services" },
+  { key: "nav.projects", href: "/projects" },
+  { key: "nav.contact", href: "/contact" },
+];
+
+const services = [
+  { ar: "تطوير البرمجيات", en: "Software Development" },
+  { ar: "الأمن السيبراني", en: "Cybersecurity" },
+  { ar: "حلول الشبكات", en: "Networking Solutions" },
+  { ar: "التحول الرقمي", en: "Digital Transformation" },
+  { ar: "الاستشارات التقنية", en: "IT Consulting" },
+];
+
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-foreground text-background mt-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="relative overflow-hidden" style={{ background: "linear-gradient(160deg, #05091a 0%, #070d20 60%, #040810 100%)" }}>
+      {/* Top accent line */}
+      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(80,130,255,0.5), rgba(0,210,240,0.4), transparent)" }} />
+
+      {/* Background grid */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "linear-gradient(rgba(80,130,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(80,130,255,0.8) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+      />
+
+      {/* Glow orbs */}
+      <div className="absolute top-0 start-1/4 w-96 h-96 rounded-full opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle, rgba(80,130,255,0.6) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-0 end-1/4 w-64 h-64 rounded-full opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,210,240,0.6) 0%, transparent 70%)" }} />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+
+        {/* CTA strip */}
+        <div className="mb-14 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="text-xs text-cyan-400 font-semibold uppercase tracking-widest mb-1">{lang === "ar" ? "هل أنت مستعد؟" : "Ready to start?"}</p>
+            <h3 className="text-xl font-black text-white">{lang === "ar" ? "ابدأ مشروعك معنا اليوم" : "Start your project with us today"}</h3>
+          </div>
+          <Link href="/contact">
+            <button className="shrink-0 flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-sm hover:opacity-90 hover:scale-105 transition-all shadow-lg shadow-blue-500/25">
+              {lang === "ar" ? "تواصل معنا" : "Get in touch"}
+              <ArrowUpRight size={16} />
+            </button>
+          </Link>
+        </div>
+
+        {/* Main grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12">
+
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <span className="text-2xl font-black">
-              <span className="text-primary">NOV</span>
-              <span>EX</span>
-              <span className="text-secondary text-sm font-medium ms-1">Solutions</span>
-            </span>
-            <p className="mt-4 text-sm text-background/70 max-w-xs leading-relaxed">
+          <div className="lg:col-span-4">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                <Zap size={16} className="text-white" />
+              </div>
+              <span className="text-xl font-black tracking-tight">
+                <span className="text-blue-400">NOV</span>
+                <span className="text-white">EX</span>
+                <span className="text-cyan-400 text-sm font-medium ms-1">Solutions</span>
+              </span>
+            </div>
+            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-6">
               {t("footer.desc")}
             </p>
-            <div className="flex gap-3 mt-6">
+            <div className="flex gap-3">
               <a
                 href="https://wa.me/96600000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-whatsapp"
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+                className="group flex items-center justify-center w-10 h-10 rounded-xl border border-white/10 bg-white/5 text-[#25D366] hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-all"
               >
-                <SiWhatsapp size={16} />
+                <SiWhatsapp size={17} />
               </a>
               <a
                 href="https://facebook.com/novexsolutions"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-facebook"
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1877F2]/20 text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-colors"
+                className="group flex items-center justify-center w-10 h-10 rounded-xl border border-white/10 bg-white/5 text-[#4A90D9] hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] transition-all"
               >
-                <SiFacebook size={16} />
+                <SiFacebook size={17} />
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider mb-5 text-background/50">
+          {/* Navigation */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5">
               {t("footer.links")}
-            </h3>
+            </h4>
             <ul className="space-y-3">
-              {[
-                { key: "nav.home", href: "/" },
-                { key: "nav.about", href: "/about" },
-                { key: "nav.services", href: "/services" },
-                { key: "nav.projects", href: "/projects" },
-                { key: "nav.contact", href: "/contact" },
-              ].map(({ key, href }) => (
+              {navLinks.map(({ key, href }) => (
                 <li key={key}>
                   <Link href={href}>
-                    <span className="text-sm text-background/70 hover:text-background transition-colors cursor-pointer">
+                    <span className="text-sm text-slate-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 group">
+                      <span className="w-0 group-hover:w-3 overflow-hidden transition-all duration-200 h-px bg-blue-400" />
                       {t(key)}
                     </span>
                   </Link>
@@ -67,44 +117,78 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Services */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5">
+              {t("services.title")}
+            </h4>
+            <ul className="space-y-3">
+              {services.map((s) => (
+                <li key={s.en}>
+                  <Link href="/services">
+                    <span className="text-sm text-slate-400 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 group">
+                      <span className="w-0 group-hover:w-3 overflow-hidden transition-all duration-200 h-px bg-cyan-400" />
+                      {lang === "ar" ? s.ar : s.en}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Contact */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider mb-5 text-background/50">
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5">
               {t("footer.contact")}
-            </h3>
+            </h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Mail size={15} className="mt-0.5 text-primary shrink-0" />
-                <a
-                  href="mailto:novex.vx@gmail.com"
-                  className="text-sm text-background/70 hover:text-background transition-colors"
-                  data-testid="footer-email"
-                >
-                  novex.vx@gmail.com
+              <li>
+                <a href="mailto:novex.vx@gmail.com" data-testid="footer-email"
+                  className="flex items-start gap-3 group">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 group-hover:bg-blue-500/20 transition-colors">
+                    <Mail size={13} className="text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "البريد" : "Email"}</p>
+                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">novex.vx@gmail.com</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="tel:+96655000000" className="flex items-start gap-3 group">
+                  <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0 group-hover:bg-cyan-500/20 transition-colors">
+                    <Phone size={13} className="text-cyan-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "الهاتف" : "Phone"}</p>
+                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">{t("contact.phone.value")}</span>
+                  </div>
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Phone size={15} className="mt-0.5 text-primary shrink-0" />
-                <a
-                  href="tel:+96655000000"
-                  className="text-sm text-background/70 hover:text-background transition-colors"
-                  data-testid="footer-phone"
-                >
-                  {t("contact.phone.value")}
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin size={15} className="mt-0.5 text-primary shrink-0" />
-                <span className="text-sm text-background/70">{t("contact.location.value")}</span>
+                <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center shrink-0">
+                  <MapPin size={13} className="text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "الموقع" : "Location"}</p>
+                  <span className="text-sm text-slate-300">{t("contact.location.value")}</span>
+                </div>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-background/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-background/40">
+        {/* Bottom bar */}
+        <div className="pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-slate-600">
             &copy; {year} NOVEX Solutions. {t("footer.rights")}.
           </p>
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-xs text-slate-600">
+              {lang === "ar" ? "جميع الأنظمة تعمل" : "All systems operational"}
+            </span>
+          </div>
         </div>
       </div>
     </footer>
