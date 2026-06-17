@@ -1,8 +1,11 @@
 import { Link } from "wouter";
-import { motion } from "framer-motion";
 import { SiWhatsapp, SiFacebook } from "react-icons/si";
-import { Mail, Phone, MapPin, ArrowUpRight, Zap } from "lucide-react";
+import { Mail, Phone, Wifi, ArrowUpRight, Zap } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+
+const WA_NUMBER = "201016058253";
+const WA_MESSAGE = encodeURIComponent("Hello, I'm reaching out via NOVEX Solutions website.");
+const FB_URL = "https://www.facebook.com/share/1CZpvVBEp8/";
 
 const navLinks = [
   { key: "nav.home", href: "/" },
@@ -78,7 +81,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://wa.me/96600000000"
+                href={`https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-whatsapp"
@@ -87,7 +90,7 @@ export default function Footer() {
                 <SiWhatsapp size={17} />
               </a>
               <a
-                href="https://facebook.com/novexsolutions"
+                href={FB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="footer-facebook"
@@ -155,23 +158,23 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="tel:+96655000000" className="flex items-start gap-3 group">
+                <a href="tel:+201016058253" className="flex items-start gap-3 group">
                   <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0 group-hover:bg-cyan-500/20 transition-colors">
                     <Phone size={13} className="text-cyan-400" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "الهاتف" : "Phone"}</p>
-                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">{t("contact.phone.value")}</span>
+                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">+20 101 605 8253</span>
                   </div>
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center shrink-0">
-                  <MapPin size={13} className="text-purple-400" />
+                  <Wifi size={13} className="text-purple-400" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "الموقع" : "Location"}</p>
-                  <span className="text-sm text-slate-300">{t("contact.location.value")}</span>
+                  <p className="text-xs text-slate-500 mb-0.5">{lang === "ar" ? "طريقة العمل" : "Work Style"}</p>
+                  <span className="text-sm text-slate-300">{lang === "ar" ? "عمل عن بُعد" : "Fully Remote"}</span>
                 </div>
               </li>
             </ul>
@@ -183,12 +186,9 @@ export default function Footer() {
           <p className="text-xs text-slate-600">
             &copy; {year} NOVEX Solutions. {t("footer.rights")}.
           </p>
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-xs text-slate-600">
-              {lang === "ar" ? "جميع الأنظمة تعمل" : "All systems operational"}
-            </span>
-          </div>
+          <p className="text-xs text-slate-700">
+            {lang === "ar" ? "مصنوع بشغف لتحقيق التميز التقني" : "Crafted with passion for technological excellence"}
+          </p>
         </div>
       </div>
     </footer>

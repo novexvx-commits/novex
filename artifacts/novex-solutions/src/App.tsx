@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
@@ -33,19 +34,30 @@ function AnimatedRoute({ component: Component }: { component: React.ComponentTyp
   );
 }
 
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location]);
+  return null;
+}
+
 function Router() {
   const [location] = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Switch location={location} key={location}>
-        <Route path="/" component={() => <AnimatedRoute component={Home} />} />
-        <Route path="/about" component={() => <AnimatedRoute component={About} />} />
-        <Route path="/services" component={() => <AnimatedRoute component={Services} />} />
-        <Route path="/projects" component={() => <AnimatedRoute component={Projects} />} />
-        <Route path="/contact" component={() => <AnimatedRoute component={Contact} />} />
-        <Route component={NotFound} />
-      </Switch>
-    </AnimatePresence>
+    <>
+      <ScrollToTop />
+      <AnimatePresence mode="wait">
+        <Switch location={location} key={location}>
+          <Route path="/" component={() => <AnimatedRoute component={Home} />} />
+          <Route path="/about" component={() => <AnimatedRoute component={About} />} />
+          <Route path="/services" component={() => <AnimatedRoute component={Services} />} />
+          <Route path="/projects" component={() => <AnimatedRoute component={Projects} />} />
+          <Route path="/contact" component={() => <AnimatedRoute component={Contact} />} />
+          <Route component={NotFound} />
+        </Switch>
+      </AnimatePresence>
+    </>
   );
 }
 

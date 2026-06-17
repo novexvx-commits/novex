@@ -4,11 +4,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { SiWhatsapp, SiFacebook } from "react-icons/si";
-import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { Mail, Phone, Send, Loader2, Wifi } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -20,11 +19,28 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
-const WA_MESSAGE = encodeURIComponent("Hello, I'm reaching out via NOVEX Solutions website.");
+const WA_NUMBER = "201016058253";
+const WA_PREFILL = encodeURIComponent("Hello, I'm reaching out via NOVEX Solutions website.");
+const FB_URL = "https://www.facebook.com/share/1CZpvVBEp8/";
+
+function buildWhatsAppUrl(data: FormData) {
+  const msg = [
+    `*New message from NOVEX Solutions website*`,
+    ``,
+    `👤 Name: ${data.name}`,
+    `📧 Email: ${data.email}`,
+    `📌 Subject: ${data.subject}`,
+    ``,
+    `💬 Message:`,
+    data.message,
+    ``,
+    `_Via NOVEX Solutions Website_`,
+  ].join("\n");
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
 
 export default function Contact() {
   const { t, lang } = useLanguage();
-  const { toast } = useToast();
   const formReveal = useScrollReveal();
   const [sending, setSending] = useState(false);
 
@@ -33,13 +49,13 @@ export default function Contact() {
     defaultValues: { name: "", email: "", subject: "", message: "" },
   });
 
-  const onSubmit = (_data: FormData) => {
+  const onSubmit = (data: FormData) => {
     setSending(true);
     setTimeout(() => {
       setSending(false);
-      toast({ title: t("contact.success") });
+      window.open(buildWhatsAppUrl(data), "_blank");
       form.reset();
-    }, 1200);
+    }, 800);
   };
 
   return (
@@ -68,11 +84,11 @@ export default function Contact() {
           className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground hover:border-primary/40 hover:shadow-md transition-all shadow-sm">
           <Mail size={14} className="text-primary" /> novex.vx@gmail.com
         </a>
-        <a href={`https://wa.me/96600000000?text=${WA_MESSAGE}`} target="_blank" rel="noopener noreferrer"
+        <a href={`https://wa.me/${WA_NUMBER}?text=${WA_PREFILL}`} target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground hover:border-[#25D366]/40 hover:shadow-md transition-all shadow-sm">
           <SiWhatsapp size={14} className="text-[#25D366]" /> WhatsApp
         </a>
-        <a href="https://facebook.com/novexsolutions" target="_blank" rel="noopener noreferrer"
+        <a href={FB_URL} target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground hover:border-[#1877F2]/40 hover:shadow-md transition-all shadow-sm">
           <SiFacebook size={14} className="text-[#1877F2]" /> Facebook
         </a>
@@ -88,9 +104,14 @@ export default function Contact() {
         >
           {/* ── FORM (spans 2 cols) ── */}
           <div className="lg:col-span-2 bg-card border border-border rounded-2xl p-8 lg:p-10">
-            <h2 className="text-xl font-black text-foreground mb-7">
+            <h2 className="text-xl font-black text-foreground mb-2">
               {lang === "ar" ? "أرسل لنا رسالة" : "Send us a message"}
             </h2>
+            <p className="text-sm text-muted-foreground mb-7">
+              {lang === "ar"
+                ? "سيتم توجيه رسالتك مباشرة عبر واتساب."
+                : "Your message will be sent directly via WhatsApp."}
+            </p>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -142,24 +163,21 @@ export default function Contact() {
                   type="submit"
                   data-testid="button-submit"
                   disabled={sending}
-                  className="group relative w-full h-13 h-[52px] overflow-hidden rounded-xl font-bold text-sm text-white transition-all disabled:opacity-60"
+                  className="group relative w-full h-[52px] overflow-hidden rounded-xl font-bold text-sm text-white transition-all disabled:opacity-60"
                   style={{ background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(192,95%,40%) 100%)" }}
                 >
-                  {/* Liquid wave */}
                   <span
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
                       background: "radial-gradient(ellipse 120% 60% at 50% 120%, rgba(255,255,255,0.2) 0%, transparent 70%)",
                     }}
                   />
-                  {/* Shimmer sweep */}
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700"
                     style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)" }} />
-
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     {sending ? (
                       <><Loader2 size={16} className="animate-spin" />
-                        {lang === "ar" ? "جاري الإرسال..." : "Sending..."}</>
+                        {lang === "ar" ? "جاري الإرسال..." : "Opening WhatsApp..."}</>
                     ) : (
                       <><Send size={15} />{t("contact.send")}</>
                     )}
@@ -178,8 +196,8 @@ export default function Contact() {
               </h3>
               {[
                 { icon: Mail, label: t("contact.email.label"), value: "novex.vx@gmail.com", href: "mailto:novex.vx@gmail.com", color: "text-blue-500", bg: "bg-blue-500/10" },
-                { icon: Phone, label: t("contact.phone.label"), value: t("contact.phone.value"), href: "tel:+96655000000", color: "text-cyan-500", bg: "bg-cyan-500/10" },
-                { icon: MapPin, label: t("contact.location.label"), value: t("contact.location.value"), href: undefined, color: "text-purple-500", bg: "bg-purple-500/10" },
+                { icon: Phone, label: t("contact.phone.label"), value: "+20 101 605 8253", href: "tel:+201016058253", color: "text-cyan-500", bg: "bg-cyan-500/10" },
+                { icon: Wifi, label: lang === "ar" ? "طريقة العمل" : "Work Style", value: lang === "ar" ? "نعمل عن بُعد بالكامل" : "Fully remote", href: undefined, color: "text-purple-500", bg: "bg-purple-500/10" },
               ].map(({ icon: Icon, label, value, href, color, bg }) => (
                 <div key={label} className="flex items-start gap-3">
                   <div className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center shrink-0`}>
@@ -202,28 +220,32 @@ export default function Contact() {
               <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-4">
                 {t("footer.follow")}
               </h3>
-              <a href={`https://wa.me/96600000000?text=${WA_MESSAGE}`}
+              <a href={`https://wa.me/${WA_NUMBER}?text=${WA_PREFILL}`}
                 target="_blank" rel="noopener noreferrer" data-testid="contact-whatsapp"
                 className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#25D366]/20 bg-[#25D366]/5 text-[#25D366] font-semibold text-sm hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-all">
                 <SiWhatsapp size={18} /> WhatsApp
               </a>
-              <a href="https://facebook.com/novexsolutions"
+              <a href={FB_URL}
                 target="_blank" rel="noopener noreferrer" data-testid="contact-facebook"
                 className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#1877F2]/20 bg-[#1877F2]/5 text-[#1877F2] font-semibold text-sm hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] transition-all">
                 <SiFacebook size={18} /> Facebook
               </a>
             </div>
 
-            {/* Map placeholder */}
-            <div className="bg-card border border-border rounded-2xl overflow-hidden flex-1 min-h-[140px]">
-              <div className="relative h-full min-h-[140px] bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                <div className="absolute inset-0 opacity-10"
-                  style={{ backgroundImage: "linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-                <div className="relative text-center">
-                  <MapPin size={28} className="text-primary mx-auto mb-2" />
-                  <p className="text-sm font-bold text-foreground">{t("contact.map.title")}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{t("contact.location.value")}</p>
-                </div>
+            {/* Remote work note */}
+            <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 rounded-2xl p-6 flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                <Wifi size={16} className="text-primary" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground mb-1">
+                  {lang === "ar" ? "نعمل عن بُعد" : "We Work Remotely"}
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {lang === "ar"
+                    ? "فريقنا موزع في عدة مناطق ونعمل عن بُعد بالكامل لنقدم لك أفضل خدمة."
+                    : "Our team is distributed and fully remote, allowing us to serve clients across regions."}
+                </p>
               </div>
             </div>
           </div>

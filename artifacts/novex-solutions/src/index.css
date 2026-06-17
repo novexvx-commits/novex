@@ -79,6 +79,9 @@
 
   --glow-primary: 0 0 40px rgba(51, 102, 204, 0.15);
   --glow-secondary: 0 0 40px rgba(0, 178, 204, 0.12);
+
+  --theme-x: 50%;
+  --theme-y: 0%;
 }
 
 .dark {
@@ -114,9 +117,35 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    transition: background-color 0.4s ease, color 0.4s ease;
   }
 }
+
+/* ── Theme toggle: circle-reveal (ink splash) ─────────────── */
+@keyframes theme-reveal {
+  from { clip-path: circle(0% at var(--theme-x) var(--theme-y)); }
+  to   { clip-path: circle(150% at var(--theme-x) var(--theme-y)); }
+}
+
+::view-transition-new(root) {
+  animation: theme-reveal 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
+
+/* ── Tech marquee CSS animation ──────────────────────────── */
+@keyframes marquee-ltr {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-rtl {
+  from { transform: translateX(0); }
+  to   { transform: translateX(50%); }
+}
+.marquee-ltr { animation: marquee-ltr 24s linear infinite; }
+.marquee-rtl { animation: marquee-rtl 24s linear infinite; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 6px; }

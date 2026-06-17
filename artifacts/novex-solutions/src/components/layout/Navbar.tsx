@@ -26,7 +26,20 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const handleThemeToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const next = theme === "dark" ? "light" : "dark";
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.round(rect.left + rect.width / 2);
+    const y = Math.round(rect.top + rect.height / 2);
+    document.documentElement.style.setProperty("--theme-x", `${x}px`);
+    document.documentElement.style.setProperty("--theme-y", `${y}px`);
+    if ("startViewTransition" in document) {
+      (document as unknown as { startViewTransition: (cb: () => void) => void })
+        .startViewTransition(() => setTheme(next));
+    } else {
+      setTheme(next);
+    }
+  };
 
   return (
     <header
@@ -81,7 +94,7 @@ export default function Navbar() {
               {lang === "ar" ? "EN" : "AR"}
             </button>
             <button
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               data-testid="theme-toggle"
               className="p-2 rounded-full border border-border hover:border-primary text-muted-foreground hover:text-primary transition-all"
             >

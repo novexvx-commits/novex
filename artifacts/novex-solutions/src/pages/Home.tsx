@@ -17,12 +17,12 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.12 } } };
 
 const serviceColors = [
-  { from: "from-blue-500", to: "to-indigo-600", light: "bg-blue-500/10", text: "text-blue-600 dark:text-blue-400" },
-  { from: "from-red-500", to: "to-orange-600", light: "bg-red-500/10", text: "text-red-600 dark:text-red-400" },
-  { from: "from-green-500", to: "to-teal-600", light: "bg-green-500/10", text: "text-green-600 dark:text-green-400" },
-  { from: "from-amber-500", to: "to-yellow-500", light: "bg-amber-500/10", text: "text-amber-600 dark:text-amber-400" },
-  { from: "from-purple-500", to: "to-violet-600", light: "bg-purple-500/10", text: "text-purple-600 dark:text-purple-400" },
-  { from: "from-cyan-500", to: "to-sky-600", light: "bg-cyan-500/10", text: "text-cyan-600 dark:text-cyan-400" },
+  { from: "from-blue-500", to: "to-indigo-600", glow: "hover:shadow-blue-500/20" },
+  { from: "from-red-500", to: "to-orange-600", glow: "hover:shadow-red-500/20" },
+  { from: "from-green-500", to: "to-teal-600", glow: "hover:shadow-green-500/20" },
+  { from: "from-amber-500", to: "to-yellow-500", glow: "hover:shadow-amber-500/20" },
+  { from: "from-purple-500", to: "to-violet-600", glow: "hover:shadow-purple-500/20" },
+  { from: "from-cyan-500", to: "to-sky-600", glow: "hover:shadow-cyan-500/20" },
 ];
 
 const services = [
@@ -70,7 +70,6 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
         <ParticleCanvas />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-6 border border-primary/20">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -136,16 +135,16 @@ export default function Home() {
             const c = serviceColors[i];
             return (
               <motion.div key={key} variants={fadeUp}
-                className="group relative bg-card border border-border rounded-2xl p-7 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 overflow-hidden"
-                whileHover={{ y: -4 }}>
-                {/* Subtle gradient on hover */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${c.from}/5 ${c.to}/5`} />
-                <div className={`relative w-12 h-12 rounded-xl bg-gradient-to-br ${c.from} ${c.to} flex items-center justify-center mb-5 shadow-md`}>
+                className={`group relative bg-card border border-border rounded-2xl p-7 transition-all duration-300 overflow-hidden hover:border-transparent hover:-translate-y-1 hover:shadow-2xl ${c.glow}`}
+                whileHover={{ scale: 1.015 }}>
+                {/* Hover glow ring */}
+                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${c.from}/5 ${c.to}/5`} />
+                <div className={`absolute inset-0 rounded-2xl ring-1 ring-inset ring-transparent group-hover:ring-white/10 transition-all duration-300`} />
+                <div className={`relative w-12 h-12 rounded-xl bg-gradient-to-br ${c.from} ${c.to} flex items-center justify-center mb-5 shadow-md group-hover:shadow-lg transition-shadow`}>
                   <Icon size={22} className="text-white" />
                 </div>
                 <h3 className="relative text-lg font-bold text-foreground mb-2">{t(`${key}.title`)}</h3>
                 <p className="relative text-sm text-muted-foreground leading-relaxed">{t(`${key}.desc`)}</p>
-                <div className={`absolute bottom-0 inset-x-0 h-0.5 bg-gradient-to-r ${c.from} ${c.to} opacity-0 group-hover:opacity-100 transition-opacity`} />
               </motion.div>
             );
           })}
@@ -255,7 +254,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TECH MARQUEE (pauses on hover) ─── */}
+      {/* ── TECH MARQUEE (CSS-based, pauses per item on hover) ─── */}
       <section className="py-16 overflow-hidden bg-background">
         <div className="text-center mb-10 px-4">
           <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">{t("tech.title")}</p>
@@ -266,28 +265,19 @@ export default function Home() {
           onMouseEnter={() => setMarqueeHovered(true)}
           onMouseLeave={() => setMarqueeHovered(false)}
         >
-          <motion.div
-            animate={{ x: lang === "ar" ? [0, "50%"] : [0, "-50%"] }}
-            transition={{
-              repeat: Infinity,
-              duration: 22,
-              ease: "linear",
-              ...(marqueeHovered ? { repeatType: "loop" } : {}),
-            }}
+          <div
+            className={lang === "ar" ? "marquee-rtl flex gap-4 shrink-0" : "marquee-ltr flex gap-4 shrink-0"}
             style={{ animationPlayState: marqueeHovered ? "paused" : "running" }}
-            className="flex gap-4 shrink-0"
           >
             {[...techStack, ...techStack].map((tech, i) => (
-              <div key={i}
-                className={`shrink-0 px-6 py-3 bg-card border rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 ${
-                  marqueeHovered
-                    ? "border-primary/30 text-foreground shadow-sm"
-                    : "border-border text-muted-foreground"
-                }`}>
+              <div
+                key={i}
+                className="shrink-0 px-6 py-3 bg-card border border-border rounded-xl text-sm font-semibold whitespace-nowrap cursor-default transition-all duration-200 hover:border-primary/60 hover:text-primary hover:bg-primary/5 hover:shadow-md hover:shadow-primary/10 hover:-translate-y-0.5"
+              >
                 {tech}
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
