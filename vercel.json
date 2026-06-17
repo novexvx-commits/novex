@@ -1,11 +1,32 @@
 {
   "version": 2,
   "buildCommand": "pnpm --filter @workspace/api-server run build && PORT=5173 BASE_PATH=/ pnpm --filter @workspace/novex-solutions run build",
-  "outputDirectory": "artifacts/novex-solutions/dist/public",
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/index.mjs"
+      "src": "artifacts/api-server/dist/handler.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "artifacts/novex-solutions/dist/public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/artifacts/api-server/dist/handler.mjs"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/artifacts/novex-solutions/dist/public/assets/$1"
+    },
+    {
+      "src": "/(favicon\\.svg|logo\\.png|opengraph\\.jpg|robots\\.txt)",
+      "dest": "/artifacts/novex-solutions/dist/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/artifacts/novex-solutions/dist/public/index.html"
     }
   ]
 }
