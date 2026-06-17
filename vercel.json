@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm --filter @workspace/api-server run build && PORT=5173 BASE_PATH=/ pnpm --filter @workspace/novex-solutions run build",
+  "buildCommand": "pnpm --filter @workspace/api-server run build && cross-env PORT=5173 BASE_PATH=/ pnpm --filter @workspace/novex-solutions run build",
   "builds": [
     {
       "src": "artifacts/api-server/dist/handler.mjs",
