@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "pnpm --filter @workspace/api-server run build && PORT=5173 BASE_PATH=/ pnpm --filter @workspace/novex-solutions run build",
+  "buildCommand": "PORT=5173 BASE_PATH=/ pnpm --filter @workspace/novex-solutions run build",
   "outputDirectory": "artifacts/novex-solutions/dist/public",
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
